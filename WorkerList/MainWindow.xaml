@@ -1,0 +1,142 @@
+﻿<Window x:Class="PeopleListFozzy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900" MinWidth="900" WindowStyle="None" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Main window border -->
+        <Grid Grid.Row="0" Background="#0066CC" PreviewMouseLeftButtonDown="StackPanel_PreviewMouseLeftButtonDown">
+            <Button Style="{StaticResource Exit}" Width="30" Height="30" HorizontalAlignment="Right" PreviewMouseDown="Button_PreviewMouseDown"/>
+            <Label Content="People list" Height="30" FontSize="15" Foreground="White" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        <!-- Content -->
+        <Grid Grid.Row="1" Background="#131719">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Search panel -->
+            <Grid Grid.Column="0" Background="#0A0D0E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="0" Background="#0A0D0E" Margin="10" Foreground="White" 
+                         FontFamily="Nornal" FontSize="20" Padding="5" BorderBrush="#0066CC" TextChanged="TextBox_TextChanged"/>
+                <ListBox Grid.Row="1" x:Name="PeoplesItem" Background="#0A0D0E" Foreground="White" BorderBrush="#0A0D0E"
+                         HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                         ItemsSource="{Binding}" SelectionChanged="PeoplesItem_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Grid.Column="0" Width="60" Height="60">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="icons/people.jpg" Stretch="UniformToFill"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Grid Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Foreground="White" Content="{Binding FullName}" FontSize="16"/>
+                                    <Label Grid.Row="1" Foreground="White" Content="{Binding Position}" FontSize="16"/>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <!-- People iformation -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="2" Grid.Column="3" Style="{StaticResource Next}" PreviewMouseDown="NextWorker"/>
+                <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource Last}" PreviewMouseDown="LastWorker"/>
+                <Button Grid.Row="6" Grid.Column="3" Style="{StaticResource Add}" PreviewMouseDown="AddWorker"/>
+                <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" Style="{StaticResource Delete}" PreviewMouseDown="DeleteWorker"/>
+                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Foreground="White" Background="#131719"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Content="--------------------------------------------------------------------------------------------------------------------------"/>
+                
+                <!-- Working information -->
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="Working informatiom:"
+                       Foreground="#0066CC" FontSize="20" HorizontalAlignment="Center"/>
+                <Ellipse Grid.Row="1" Grid.Column="0" Margin="20">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="icons/peopleMain.jpg" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0, 0, 5, 0">
+                        <Label FontSize="20" Content="Full name:" Foreground="White"/>
+                        <Label FontSize="20" Content="Position:" Foreground="White"/>
+                        <Label FontSize="20" Content="Salary:" Foreground="White"/>
+                        <Label FontSize="20" Content="ID:" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label x:Name="LabelFullName" FontSize="20" Foreground="White"/>
+                        <Label x:Name="LabelPosition" FontSize="20" Foreground="White"/>
+                        <Label x:Name="LabelSalary" FontSize="20" Foreground="White"/>
+                        <Label  x:Name="LabelID" FontSize="20" Foreground="White"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Add new worker -->
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Content="Add new worker:"
+                       FontSize="20" Foreground="#0066CC" HorizontalAlignment="Center"/>
+                <Ellipse Grid.Row="5" Grid.Column="0" Margin="20">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="icons/peopleMain.jpg" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Grid Grid.Row="5" Grid.Column="1" Grid.RowSpan="2">
+                    <StackPanel>
+                        <Label FontSize="15" Content="Full name:" Foreground="White"/>
+                        <TextBox x:Name="TextFullName" Background="#131719" BorderBrush="#0066CC" Foreground="White" FontSize="15" 
+                                 HorizontalAlignment="Left" Width="270"/>
+                        <Label FontSize="15" Content="Position:" Foreground="White"/>
+                        <TextBox x:Name="TextPosition" Background="#131719" BorderBrush="#0066CC" Foreground="White" FontSize="15" 
+                                 HorizontalAlignment="Left" Width="270"/>
+                        <Label FontSize="15" Content="Salary:" Foreground="White"/>
+                        <TextBox x:Name="TextSalary" Background="#131719" BorderBrush="#0066CC" Foreground="White" FontSize="15" 
+                                 HorizontalAlignment="Left" Width="270"/>
+                        <Label FontSize="15" Content="ID:" Foreground="White"/>
+                        <TextBox x:Name="TextID" Background="#131719" BorderBrush="#0066CC" Foreground="White" FontSize="15" 
+                                 HorizontalAlignment="Left" Width="270"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

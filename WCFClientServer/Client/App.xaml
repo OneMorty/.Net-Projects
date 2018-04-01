@@ -1,0 +1,46 @@
+﻿<Application x:Class="ClientWPFFozzy.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClientWPFFozzy"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Exit Button -->
+        <Style x:Key="Exit">
+            <Setter Property="Button.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid Name="Head">
+                            <Label Name="Content" Content="X" HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Head" Property="Background" Value="Red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Send Request Button -->
+        <Style x:Key="Send">
+            <Setter Property="Button.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Rectangle Name="BacgroundElement" Fill="#0066CC" RadiusX="15" RadiusY="15"/>
+                            <Label Name="TextElement" Content="Send" Foreground="White" FontSize="22" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseDirectlyOver" Value="true">
+                                <Setter TargetName="TextElement" Property="FontSize" Value="20"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

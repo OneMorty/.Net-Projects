@@ -1,0 +1,47 @@
+﻿<Window x:Class="ClientWPFFozzy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientWPFFozzy"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900" MinWidth="900" WindowStyle="None" ResizeMode="NoResize">
+    <Grid Background="#131719">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Main window border -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#0066CC" PreviewMouseLeftButtonDown="WindowBehavior">
+            <Button Style="{StaticResource Exit}" Width="30" Height="30" HorizontalAlignment="Right" PreviewMouseDown="WindowClose"/>
+            <Label Content="WCF Calculator" Height="30" FontSize="15" Foreground="White" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Content="Request" FontSize="30" Foreground="White"/>
+        <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Content="Answer" FontSize="30" Foreground="White"/>
+
+        <!-- Request and answer area -->
+        <TextBlock x:Name="request" Background="#21282B" Grid.Column="0" Grid.Row="2" FontSize="16" 
+                   Margin="20, 0, 20, 20" TextAlignment="Left" Foreground="White" TextWrapping="Wrap"/>
+        <TextBlock x:Name="answer" Background="#21282B" Grid.Column="1" Grid.Row="2" FontSize="16"
+                   Margin="20, 0, 20, 20" TextAlignment="Left" Foreground="White" TextWrapping="Wrap"/>
+        
+        <!-- Request enter field -->
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="40">
+            <TextBox x:Name="requestInput" Background="#21282B" Width="500" BorderBrush="#0066CC"
+                     Margin="0, 0, 10, 0" Foreground="White" FontSize="25"/>
+            <Button x:Name="requestSend" Style="{StaticResource Send}" Width="150" 
+                    Background="Red" Margin="10, 0, 0, 0" PreviewMouseDown="SendRequest"/>
+        </StackPanel>
+    </Grid>
+</Window>
